@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Delivery Tracker - Thunder</title>
+<style>
+body{background:#0f172a;color:#fff;font-family:Arial;padding:15px}
+.card{background:#1e293b;padding:15px;border-radius:12px;margin:10px 0;border-left:4px solid #f59e0b}
+.delivered{border-left-color:#22c55e;opacity:0.6}
+button{padding:10px 15px;border:none;border-radius:8px;font-weight:bold;margin:5px}
+.btn-deliver{background:#22c55e;color:#fff}
+.btn-pending{background:#f59e0b;color:#000}
+input{padding:10px;border-radius:8px;border:none;width:90%;margin:5px 0}
+.add-box{background:#1e293b;padding:15px;border-radius:12px;margin-bottom:20px;border:2px dashed #f59e0b}
+</style>
+</head>
+<body>
+<h2 style="color:#f59e0b">📦 Thunder Tracker - LIVE</h2>
+
+<div class="add-box">
+<h3>➕ Add New Order When It Comes</h3>
+<input id="ref" placeholder="Ref: e.g. TH_123456">
+<input id="phone" placeholder="Customer Phone: e.g. 0551234567">
+<button onclick="addOrder()" style="background:#f59e0b;color:#000;width:100%">ADD NEW 1GB ORDER (GHS 5)</button>
+</div>
+
+<div id="list"></div>
+
+<script>
+let orders=JSON.parse(localStorage.getItem('thunder_all_v2')||'[]');
+if(orders.length===0){
+ orders=[
+ {ref:'TH_1788716742066',bundle:'1GB MTN',price:'GHS 5.00',phone:'055XXXX080',date:'6 Sep',delivered:true},
+ {ref:'TH_1788718041504',bundle:'1GB MTN',price:'GHS 5.00',phone:'055XXXX080',date:'6 Sep',delivered:true}
+ ];
+}
+
+function render(){
+let html='';
+orders.forEach((o,i)=>{
+html+=`<div class="card ${o.delivered?'delivered':''}">
+<b>${o.bundle} - ${o.price}</b><br>
+Ref: ${o.ref}<br>
+Phone: ${o.phone} | ${o.date}<br>
+Status: ${o.delivered?'✅ DELIVERED':'⏳ PENDING - SEND DATA NOW!'}<br>
+<button class="${o.delivered?'btn-pending':'btn-deliver'}" onclick="toggle(${i})">${o.delivered?'Mark Pending':'Mark as DELIVERED ✅'}</button>
+<a href="https://wa.me/233${o.phone.slice(-9)}?text=Hello! Your ${o.bundle} Ref ${o.ref} is delivered! - Thunder Data" target="_blank"><button style="background:#25D366;color:#fff">WhatsApp Customer</button></a>
+</div>`;
+});
+document.getElementById('list').innerHTML=html;
+localStorage.setItem('thunder_all_v2',JSON.stringify(orders));
+}
+
+function toggle(i){ orders[i].delivered=!orders[i].delivered; render(); }
+
+function addOrder(){
+let r=document.getElementById('ref').value||'TH_'+Date.now();
+let p=document.getElementById('phone').value||'055XXXXXXX';
+let newO={ref:r,bundle:'1GB MTN',price:'GHS 5.00',phone:p,date:new Date().toLocaleDateString(),delivered:false};
+orders.unshift(newO);
+render();
+document.getElementById('ref').value='';
+document.getElementById('phone').value='';
+alert('New 1GB order added! Now send data!');
+}
+
+render();
+</script>
+<p style="text-align:center;margin-top:20px"><a href="index.html" style="color:#f59e0b">← Back to Shop</a></p>
+</body>
+</html>
