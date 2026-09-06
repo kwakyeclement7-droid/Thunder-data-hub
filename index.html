@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thunder Cheap Data Hub</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#0B1220;color:#fff}
+.top{background:#000;color:#FFD700;padding:10px;text-align:center;font-weight:900;border-bottom:3px solid #FFD700}
+.hero{text-align:center;padding:8px}
+.hero img{width:100%;max-width:500px;border-radius:12px;border:2px solid #FFD700}
+.wrap{max-width:520px;margin:0 auto;padding:12px}
+.box{background:#151D2E;border:1px solid #1E2A42;border-radius:14px;padding:14px;margin:10px 0}
+input,select{width:100%;padding:13px;border-radius:10px;border:1px solid #2A3A5A;background:#0B1220;color:#fff;margin-top:8px;font-size:15px}
+.tabs{display:flex;gap:8px;margin:12px 0}
+.t{flex:1;padding:10px;text-align:center;background:#151D2E;border:2px solid #FFD700;color:#FFD700;border-radius:10px;font-weight:900}
+.t.active{background:#FFD700;color:#000}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:#151D2E;border:2px solid #2A3A5A;border-radius:12px;padding:12px;text-align:center}
+.card b{color:#FFD700;font-size:18px}
+.card button{width:100%;margin-top:8px;background:#FFD700;color:#000;border:none;padding:10px;border-radius:8px;font-weight:900}
+#toast{position:fixed;top:15px;left:12px;right:12px;padding:14px;border-radius:10px;text-align:center;font-weight:900;display:none;z-index:9999}
+#toast.show{display:block}
+.ok{background:#00c853;color:#fff}.err{background:#ff1744;color:#fff}
+#receipt{display:none}
+.r-top{background:#151D2E;border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:center;border:1px solid #1E2A42}
+.mtn-logo{width:56px;height:56px;background:#FFCC00;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#000;font-weight:900}
+.proc{background:#1A2B4D;color:#5AA0FF;padding:6px 12px;border-radius:20px;font-size:14px;display:inline-block;margin-top:6px}
+.r-row{background:#151D2E;border-radius:14px;padding:16px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;border:1px solid #1E2A42}
+.ok-box{border:2px solid #00C853;background:#0B1F14;border-radius:14px;padding:16px;color:#00E676}
+</style>
+</head>
+<body>
+<div class="top">⚡ THUNDER CHEAP DATA HUB ⚡</div>
+<div class="hero"><img src="flyer.jpg" onerror="this.style.display='none'"><div style="background:#FFD700;color:#000;display:inline-block;padding:6px 14px;border-radius:20px;font-weight:900;margin-top:8px">⚡ INSTANT • 24/7 • KUMASI ⚡</div></div>
+<div id="shop" class="wrap">
+<div id="toast"></div>
+<div class="box"><h3>Enter Beneficiary Details</h3><input id="phone" type="tel" placeholder="Beneficiary 054..." maxlength="10"><select id="net" onchange="setNet(this.value)"><option value="mtn">MTN</option><option value="telecel">Telecel</option><option value="airteltigo">AirtelTigo</option></select><input id="email" type="email" placeholder="Your Email"></div>
+<div class="tabs"><div class="t active" id="tm" onclick="setNet('mtn')">MTN</div><div class="t" id="tt" onclick="setNet('telecel')">Telecel</div><div class="t" id="ta" onclick="setNet('airteltigo')">AT</div></div>
+<div id="grid" class="grid"></div>
+</div>
+<div id="receipt" class="wrap">
+<div class="r-top"><div style="display:flex;gap:12px;align-items:center"><div class="mtn-logo">MTN</div><div><div style="font-weight:900;font-size:20px" id="r-title">MTN • 2GB</div><div class="proc">● Processing</div></div></div><div style="font-weight:900;font-size:22px" id="r-price">GH₵8.50</div></div>
+<div class="r-row"><span>📞 Phone</span><b id="r-phone">0552283133</b></div>
+<div class="r-row"><span>📄 Ref</span><b id="r-ref">AGT-MTN-JJ3965RH</b></div>
+<div class="r-row"><span># Track</span><b id="r-track" style="color:#4A9CFF">KT-6642878345</b></div>
+<div class="ok-box"><div style="font-weight:900">✅ Verified & accepted — being delivered</div><div style="margin-top:8px">Your number passed verification and the order has been accepted. Your data is being delivered now — no action needed.</div></div>
+<button onclick="location.reload()" style="width:100%;margin-top:16px;padding:14px;background:#FFD700;color:#000;border:none;border-radius:12px;font-weight:900">Buy More Data</button>
+</div>
+<script>
+const data={mtn:[{g:'1GB',p:5},{g:'2GB',p:10},{g:'3GB',p:14.5},{g:'4GB',p:14.5}{g:'5GB',p:24.5},{g:'10GB',p:45}],telecel:[{g:'5GB',p:22},{g:'10GB',p:44}],airteltigo:[{g:'1GB',p:4.5},{g:'5GB',p:24.5}]};
+let cur='mtn';const KEY='pk_live_45851513b7f163a6bba4081f633c923ebc48cf32';
+function setNet(n){cur=n;document.getElementById('net').value=n;document.querySelectorAll('.t').forEach(x=>x.classList.remove('active'));document.getElementById('t'+n[0]).classList.add('active');render();}
+function render(){let h='';data[cur].forEach(x=>{h+=`<div class="card"><b>${x.g}</b><div style="font-size:12px;color:#8A9BB5">${cur.toUpperCase()}</div><div style="font-weight:900;margin:6px 0">Ghc ${x.p}</div><button onclick="buy('${x.g}',${x.p})">BUY NOW</button></div>`});document.getElementById('grid').innerHTML=h;}
+function toast(m,c){let t=document.getElementById('toast');t.textContent=m;t.className='show '+c;setTimeout(()=>t.className='',4000);}
+function buy(gb,price){let phone=document.getElementById('phone').value.trim();let email=document.getElementById('email').value.trim();if(phone.length<10){toast('Enter number','err');return;}if(!email.includes('@')){toast('Enter email','err');return;}PaystackPop.setup({key:KEY,email:email,amount:Math.round(price*100),currency:'GHS',ref:'THUNDER_'+Date.now(),callback:function(r){document.getElementById('shop').style.display='none';document.getElementById('receipt').style.display='block';document.getElementById('r-title').textContent=cur.toUpperCase()+' • '+gb;document.getElementById('r-price').textContent='GH₵'+price;document.getElementById('r-phone').textContent=phone;document.getElementById('r-ref').textContent='AGT-'+cur.toUpperCase()+'-'+r.reference.slice(-8).toUpperCase();document.getElementById('r-track').textContent='KT-'+Math.floor(Math.random()*9000000000+1000000000);let msg=`NEW ORDER! Package:${gb} ${cur} Number:${phone} Amount:Ghc${price} Ref:${r.reference}`;setTimeout(()=>{window.open('https://wa.me/233257439080?text='+encodeURIComponent(msg),'_blank')},1200);},onClose:function(){}}).openIframe();}
+render();
+</script>
+</body>
+</html>
