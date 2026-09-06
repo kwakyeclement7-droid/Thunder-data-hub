@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Delivery Tracker - Thunder</title>
+<style>
+body{background:#0f172a;color:#fff;font-family:Arial;padding:15px}
+.card{background:#1e293b;padding:15px;border-radius:12px;margin:10px 0;border-left:4px solid #f59e0b}
+.delivered{border-left-color:#22c55e;opacity:0.6}
+button{padding:8px 15px;border:none;border-radius:8px;font-weight:bold;margin-top:8px}
+.btn-deliver{background:#22c55e;color:#fff}
+.btn-pending{background:#f59e0b;color:#000}
+</style>
+</head>
+<body>
+<h2 style="color:#f59e0b">📦 Delivery Tracker - 1GB</h2>
+<p>GHS 5 = 1GB MTN. Mark as delivered after you send data.</p>
+
+<div id="list"></div>
+
+<script>
+// Your 2 orders from Paystack
+let orders=[
+{ref:'TH_1788716742066',bundle:'1GB MTN',price:'GHS 5.00',phone:'X080',date:'6th Sep',delivered:false},
+{ref:'TH_1788718041504',bundle:'1GB MTN',price:'GHS 5.00',phone:'X080',date:'6th Sep',delivered:false}
+];
+
+function render(){
+let html='';
+orders.forEach((o,i)=>{
+html+=`<div class="card ${o.delivered?'delivered':''}">
+<b>${o.bundle} - ${o.price}</b><br>
+Ref: ${o.ref}<br>
+Phone: ${o.phone} | Date: ${o.date}<br>
+Status: ${o.delivered?'✅ DELIVERED':'⏳ PENDING'}<br>
+<button class="${o.delivered?'btn-pending':'btn-deliver'}" onclick="toggle(${i})">${o.delivered?'Mark Pending':'Mark as DELIVERED ✅'}</button>
+</div>`;
+});
+document.getElementById('list').innerHTML=html;
+localStorage.setItem('thunder_delivered',JSON.stringify(orders));
+}
+
+function toggle(i){
+orders[i].delivered=!orders[i].delivered;
+render();
+}
+
+// Load saved
+let saved=localStorage.getItem('thunder_delivered');
+if(saved){orders=JSON.parse(saved);}
+render();
+</script>
+
+<p style="margin-top:30px;text-align:center">
+<a href="index.html" style="color:#f59e0b">← Back to Shop</a><br><br>
+After you send data on *713* or Hubtel, come here and click DELIVERED!
+</p>
+</body>
+</html>
