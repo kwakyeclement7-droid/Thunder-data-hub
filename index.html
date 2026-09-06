@@ -1,80 +1,111 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Thunder Cheap Data Hub</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunder Cheap Data Hub - Kumasi</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0f172a;color:#fff}
-header{background:#facc15;color:#000;padding:18px;text-align:center}
-header h1{font-weight:900}
-.top{max-width:600px;margin:15px auto;background:#fff;color:#000;border-radius:12px;padding:15px}
-.top input,.top select{width:100%;padding:13px;margin:6px 0;border-radius:8px;border:2px solid #ddd}
-.top button{width:100%;background:#25D366;color:#fff;padding:15px;border:none;border-radius:10px;font-weight:900;font-size:18px}
-.grid{max-width:700px;margin:auto;padding:10px}
-.card{border-radius:12px;padding:12px;margin:12px 0}
-.mtn{background:#facc15;color:#000}
-.tele{background:#dc2626;color:#fff}
-.at{background:#2563eb;color:#fff}
-.it{display:flex;justify-content:space-between;padding:10px;margin:5px 0;background:rgba(0,0,0,0.1);border-radius:8px;font-weight:700}
-.it button{padding:6px 14px;border:none;border-radius:6px;font-weight:900;background:#000;color:#facc15}
-</style></head><body>
-<header><h1>⚡ THUNDER CHEAP DATA HUB ⚡</h1><p>MTN • TELECEL • AIRTELTIGO • 0257439080</p></header>
-<div class="top">
-<h3>Place Order</h3>
-<input id="num" placeholder="Enter your number 054...">
-<select id="bundle">
-<option value="">Choose Bundle</option>
-<option>MTN 1GB - Ghc5</option><option>MTN 2GB - Ghc10</option>
-<option>MTN 3GB - Ghc14.5</option><option>MTN 4GB - Ghc20</option>
-<option>MTN 5GB - Ghc24.5</option><option>MTN 6GB - Ghc27</option>
-<option>MTN 8GB - Ghc35</option><option>MTN 10GB - Ghc45</option>
-<option>MTN 15GB - Ghc65</option><option>MTN 20GB - Ghc90</option>
-<option>MTN 25GB - Ghc110</option><option>MTN 30GB - Ghc130</option>
-<option>MTN 40GB - Ghc170</option><option>MTN 50GB - Ghc210</option>
-<option>Telecel 10GB - Ghc44</option><option>Telecel 12GB - Ghc52</option>
-<option>Telecel 20GB - Ghc62</option><option>Telecel 25GB - Ghc101</option>
-<option>Telecel 30GB - Ghc123</option><option>Telecel 40GB - Ghc159</option>
-<option>Telecel 50GB - Ghc201</option><option>Telecel 100GB - Ghc381</option>
-<option>AT 1GB - Ghc4.50</option><option>AT 2GB - Ghc10</option>
-<option>AT 3GB - Ghc15.50</option><option>AT 8GB - Ghc40</option>
-<option>AT 10GB - Ghc48</option><option>AT 25GB - Ghc135</option>
-<option>AT 50GB - Ghc250</option>
-</select>
-<button onclick="order()">Order on WhatsApp 🟢</button>
+body{margin:0;font-family:Arial,sans-serif;background:#0a0e2a;color:white}
+.header{background:linear-gradient(90deg,#f7d000,#ffb700);color:#000;padding:15px;text-align:center}
+.header h1{margin:0;font-size:26px}
+.grid{display:grid;grid-template-columns:1fr;gap:15px;padding:15px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:#111845;border:2px solid #f7d000;border-radius:15px;padding:12px}
+.card h2{text-align:center;color:#f7d000;margin:8px 0;border-bottom:1px solid #f7d000;padding-bottom:8px}
+.item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #222c66}
+.item button{background:#f7d000;color:#000;border:none;padding:6px 14px;border-radius:20px;font-weight:bold;cursor:pointer}
+.footer{background:#000;text-align:center;padding:15px;margin-top:20px;border-top:3px solid #f7d000}
+.footer a{color:#f7d000;text-decoration:none;font-weight:bold;font-size:18px}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:999;justify-content:center;align-items:center;padding:20px}
+.modal-box{background:white;color:black;border-radius:15px;padding:20px;width:100%;max-width:400px}
+.modal-box input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc;box-sizing:border-box}
+.modal-box button{width:100%;padding:14px;background:#0a0e2a;color:#f7d000;border:none;border-radius:10px;font-weight:bold;font-size:16px;margin-top:10px}
+.close{float:right;font-size:22px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>⚡ Thunder Cheap Data Hub</h1>
+<p>Your Number • Data • Solution<br>INSTANT DELIVERY • KUMASI • 24/7 • RELIABLE</p>
 </div>
 <div class="grid">
-<div class="card mtn"><h2>MTN Offers</h2>
-<div class="it"><span>1GB - Ghc5</span><button onclick="buy('MTN 1GB - Ghc5')">Buy</button></div>
-<div class="it"><span>2GB - Ghc10</span><button onclick="buy('MTN 2GB - Ghc10')">Buy</button></div>
-<div class="it"><span>3GB - Ghc14.5</span><button onclick="buy('MTN 3GB - Ghc14.5')">Buy</button></div>
-<div class="it"><span>5GB - Ghc24.5</span><button onclick="buy('MTN 5GB - Ghc24.5')">Buy</button></div>
-<div class="it"><span>10GB - Ghc45</span><button onclick="buy('MTN 10GB - Ghc45')">Buy</button></div>
-<div class="it"><span>20GB - Ghc90</span><button onclick="buy('MTN 20GB - Ghc90')">Buy</button></div>
-<div class="it"><span>50GB - Ghc210</span><button onclick="buy('MTN 50GB - Ghc210')">Buy</button></div>
+<div class="card">
+<h2>MTN Offers</h2>
+<div class="item"><span>1GB - Ghc5</span><button onclick="openPay('MTN 1GB',5)">BUY</button></div>
+<div class="item"><span>2GB - Ghc10</span><button onclick="openPay('MTN 2GB',10)">BUY</button></div>
+<div class="item"><span>3GB - Ghc14.5</span><button onclick="openPay('MTN 3GB',14.5)">BUY</button></div>
+<div class="item"><span>4GB - Ghc20</span><button onclick="openPay('MTN 4GB',20)">BUY</button></div>
+<div class="item"><span>5GB - Ghc24.5</span><button onclick="openPay('MTN 5GB',24.5)">BUY</button></div>
+<div class="item"><span>6GB - Ghc27</span><button onclick="openPay('MTN 6GB',27)">BUY</button></div>
+<div class="item"><span>8GB - Ghc35</span><button onclick="openPay('MTN 8GB',35)">BUY</button></div>
+<div class="item"><span>10GB - Ghc45</span><button onclick="openPay('MTN 10GB',45)">BUY</button></div>
+<div class="item"><span>15GB - Ghc65</span><button onclick="openPay('MTN 15GB',65)">BUY</button></div>
+<div class="item"><span>20GB - Ghc90</span><button onclick="openPay('MTN 20GB',90)">BUY</button></div>
+<div class="item"><span>25GB - Ghc110</span><button onclick="openPay('MTN 25GB',110)">BUY</button></div>
+<div class="item"><span>30GB - Ghc130</span><button onclick="openPay('MTN 30GB',130)">BUY</button></div>
+<div class="item"><span>40GB - Ghc170</span><button onclick="openPay('MTN 40GB',170)">BUY</button></div>
+<div class="item"><span>50GB - Ghc210</span><button onclick="openPay('MTN 50GB',210)">BUY</button></div>
 </div>
-<div class="card tele"><h2>Telecel Offers</h2>
-<div class="it"><span>10GB - Ghc44</span><button onclick="buy('Telecel 10GB - Ghc44')">Buy</button></div>
-<div class="it"><span>20GB - Ghc62</span><button onclick="buy('Telecel 20GB - Ghc62')">Buy</button></div>
-<div class="it"><span>50GB - Ghc201</span><button onclick="buy('Telecel 50GB - Ghc201')">Buy</button></div>
-<div class="it"><span>100GB - Ghc381</span><button onclick="buy('Telecel 100GB - Ghc381')">Buy</button></div>
+<div class="card">
+<h2>Telecel</h2>
+<div class="item"><span>10GB - Ghc44</span><button onclick="openPay('Telecel 10GB',44)">BUY</button></div>
+<div class="item"><span>12GB - Ghc52</span><button onclick="openPay('Telecel 12GB',52)">BUY</button></div>
+<div class="item"><span>20GB - Ghc62</span><button onclick="openPay('Telecel 20GB',62)">BUY</button></div>
+<div class="item"><span>20GB - Ghc80</span><button onclick="openPay('Telecel 20GB Special',80)">BUY</button></div>
+<div class="item"><span>25GB - Ghc101</span><button onclick="openPay('Telecel 25GB',101)">BUY</button></div>
+<div class="item"><span>30GB - Ghc123</span><button onclick="openPay('Telecel 30GB',123)">BUY</button></div>
+<div class="item"><span>40GB - Ghc159</span><button onclick="openPay('Telecel 40GB',159)">BUY</button></div>
+<div class="item"><span>50GB - Ghc201</span><button onclick="openPay('Telecel 50GB',201)">BUY</button></div>
+<div class="item"><span>100GB - Ghc381</span><button onclick="openPay('Telecel 100GB',381)">BUY</button></div>
 </div>
-<div class="card at"><h2>AirtelTigo Offers</h2>
-<div class="it"><span>1GB - Ghc4.50</span><button onclick="buy('AT 1GB - Ghc4.50')">Buy</button></div>
-<div class="it"><span>3GB - Ghc15.50</span><button onclick="buy('AT 3GB - Ghc15.50')">Buy</button></div>
-<div class="it"><span>8GB - Ghc40</span><button onclick="buy('AT 8GB - Ghc40')">Buy</button></div>
-<div class="it"><span>50GB - Ghc250</span><button onclick="buy('AT 50GB - Ghc250')">Buy</button></div>
+<div class="card">
+<h2>AirtelTigo</h2>
+<div class="item"><span>1GB - Ghc4.50</span><button onclick="openPay('AirtelTigo 1GB',4.5)">BUY</button></div>
+<div class="item"><span>2GB - Ghc10</span><button onclick="openPay('AirtelTigo 2GB',10)">BUY</button></div>
+<div class="item"><span>3GB - Ghc15.50</span><button onclick="openPay('AirtelTigo 3GB',15.5)">BUY</button></div>
+<div class="item"><span>4GB - Ghc23</span><button onclick="openPay('AirtelTigo 4GB',23)">BUY</button></div>
+<div class="item"><span>6GB - Ghc28</span><button onclick="openPay('AirtelTigo 6GB',28)">BUY</button></div>
+<div class="item"><span>8GB - Ghc40</span><button onclick="openPay('AirtelTigo 8GB',40)">BUY</button></div>
+<div class="item"><span>10GB - Ghc48</span><button onclick="openPay('AirtelTigo 10GB',48)">BUY</button></div>
+<div class="item"><span>12GB - Ghc54</span><button onclick="openPay('AirtelTigo 12GB',54)">BUY</button></div>
+<div class="item"><span>25GB - Ghc135</span><button onclick="openPay('AirtelTigo 25GB',135)">BUY</button></div>
+<div class="item"><span>40GB - Ghc180</span><button onclick="openPay('AirtelTigo 40GB',180)">BUY</button></div>
+<div class="item"><span>50GB - Ghc250</span><button onclick="openPay('AirtelTigo 50GB',250)">BUY</button></div>
+</div>
+</div>
+<div class="footer">
+<p>WhatsApp Us Now:<br><a href="https://wa.me/233257439080">0257439080</a> | <a href="https://wa.me/233201898576">0201898576</a></p>
+<p>Thunder Cheap Data Hub - Kumasi, Ghana - 24/7</p>
+</div>
+<div id="payModal" class="modal">
+<div class="modal-box">
+<span class="close" onclick="closePay()">&times;</span>
+<h3 id="bundleTitle">Complete Purchase</h3>
+<input type="tel" id="customerPhone" placeholder="Beneficiary Number (e.g. 0241234567)">
+<input type="email" id="customerEmail" placeholder="Email for receipt" value="customer@thundercheapdata.com">
+<input type="tel" id="customerMoMo" placeholder="MoMo Number Paying From">
+<button onclick="payWithPaystack()">Pay Now with MoMo - LIVE</button>
+<p style="font-size:12px;text-align:center;color:#666">Secured by Paystack • MTN, Vodafone, AirtelTigo</p>
 </div>
 </div>
 <script>
-function order(){
-let n=document.getElementById('num').value||'Will send number';
-let b=document.getElementById('bundle').value||'MTN 2GB';
-let m='Hello Thunder! I want '+b+' for number '+n;
-window.open('https://wa.me/233257439080?text='+encodeURIComponent(m),'_blank');
+let selectedBundle='';let selectedAmount=0;
+function openPay(bundle,amount){selectedBundle=bundle;selectedAmount=amount;document.getElementById('bundleTitle').innerText=bundle+' - Ghc'+amount;document.getElementById('payModal').style.display='flex';}
+function closePay(){document.getElementById('payModal').style.display='none';}
+function payWithPaystack(){
+const phone=document.getElementById('customerPhone').value;
+const email=document.getElementById('customerEmail').value;
+const momo=document.getElementById('customerMoMo').value;
+if(!phone||!momo){alert('Enter beneficiary and MoMo numbers');return;}
+let handler=PaystackPop.setup({
+key:'pk_live_45851513b7f163a6bba405f8ef6c9dcf5cc0a',
+email:email,amount:selectedAmount*100,currency:'GHS',channels:['mobile_money','card'],
+metadata:{custom_fields:[{display_name:"Bundle",variable_name:"bundle",value:selectedBundle},{display_name:"Beneficiary",variable_name:"beneficiary",value:phone},{display_name:"Payer",variable_name:"payer",value:momo}]},
+callback:function(response){closePay();alert('✅ Payment Successful! Ref: '+response.reference+'\\nBundle: '+selectedBundle+'\\nFor: '+phone+'\\nWe will deliver in 2-5 mins. WhatsApp 0257439080 with ref '+response.reference);let waMsg=`NEW ORDER - Thunder Data Hub%0ARef: ${response.reference}%0ABundle: ${selectedBundle}%0AAmount: Ghc${selectedAmount}%0ABeneficiary: ${phone}%0APaid from: ${momo}`;window.open(`https://wa.me/233257439080?text=${waMsg}`,'_blank');},
+onClose:function(){alert('Payment cancelled');}
+});handler.openIframe();
 }
-function buy(b){
-let n=document.getElementById('num').value||'';
-let m='Hello Thunder! I want '+b+' Number: '+n;
-window.open('https://wa.me/233257439080?text='+encodeURIComponent(m),'_blank');
-}
-</script></body></html>
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Thunder Cheap Data Hub - Kwakye Ernest</title><style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0f172a;color:#fff}header{background:#facc15;color:#000;padding:18px;text-align:center}header h1{font-weight:900;font-size:22px}.top{max-width:600px;margin:12px auto;background:#fff;color:#000;border-radius:12px;padding:15px}.top input,.top select{width:100%;padding:13px;margin:6px 0;border-radius:8px;border:2px solid #ddd;font-size:16px}.top button{width:100%;background:#25D366;color:#fff;padding:15px;border:none;border-radius:10px;font-weight:900;font-size:18px}.momo{background:#fffde7;border:2px dashed #facc15;border-radius:10px;padding:12px;margin-top:12px;text-align:center}.grid{max-width:700px;margin:auto;padding:10px}.card{border-radius:12px;padding:12px;margin:12px 0}.mtn{background:#facc15;color:#000}.tele{background:#dc2626;color:#fff}.at{background:#2563eb;color:#fff}.it{display:flex;justify-content:space-between;padding:10px;margin:5px 0;background:rgba(0,0,0,0.1);border-radius:8px;font-weight:700}.it button{padding:6px 14px;border:none;border-radius:6px;font-weight:900;background:#000;color:#facc15;cursor:pointer}</style></head><body><header><h1>⚡ THUNDER CHEAP DATA HUB ⚡</h1><p>MTN • TELECEL • AIRTELTIGO • Kumasi • Kwakye Ernest</p></header><div class="top"><h3>⚡ Place Order</h3><input id="num" placeholder="Enter number e.g. 0543595285"><select id="bundle"><option value="">Choose Bundle</option><option>MTN 1GB - Ghc5</option><option>MTN 2GB - Ghc10</option><option>MTN 3GB - Ghc14.5</option><option>MTN 4GB - Ghc20</option><option>MTN 5GB - Ghc24.5</option><option>MTN 6GB - Ghc27</option><option>MTN 8GB - Ghc35</option><option>MTN 10GB - Ghc45</option><option>MTN 15GB - Ghc65</option><option>MTN 20GB - Ghc90</option><option>MTN 25GB - Ghc110</option><option>MTN 30GB - Ghc130</option><option>MTN 40GB - Ghc170</option><option>MTN 50GB - Ghc210</option><option>Telecel 10GB - Ghc44</option><option>Telecel 12GB - Ghc52</option><option>Telecel 20GB - Ghc62</option><option>Telecel 20GB - Ghc80</option><option>Telecel 25GB - Ghc101</option><option>Telecel 30GB - Ghc123</option><option>Telecel 40GB - Ghc159</option><option>Telecel 50GB - Ghc201</option><option>Telecel 100GB - Ghc381</option><option>AT 1GB - Ghc4.50</option><option>AT 2GB - Ghc10</option><option>AT 3GB - Ghc15.50</option><option>AT 4GB - Ghc23</option><option>AT 6GB - Ghc28</option><option>AT 8GB - Ghc40</option><option>AT 10GB - Ghc48</option><option>AT 12GB - Ghc54</option><option>AT 25GB - Ghc135</option><option>AT 40GB - Ghc180</option><option>AT 50GB - Ghc250</option></select><button onclick="order()">Order on WhatsApp 🟢</button><div class="momo"><p style="font-weight:900;color:#000">💰 PAY VIA MOMO</p><p style="color:#000;font-size:20px;margin:8px 0"><b>0257439080</b><br>Kwakye Ernest</p><p style="color:#555;font-size:13px">Extra: 0201898576</p><p style="color:#666;font-size:12px;margin-top:6px">1. Pay to MoMo above<br>2. Send receipt on WhatsApp<br>3. Get data instantly!</p><button onclick="copyMoMo()" style="background:#000;color:#facc15;padding:10px 16px
+</script>
+</body>
+</html>
