@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thunder Cheap Data Hub</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#0f172a;color:#fff}
+header{background:#facc15;color:#000;padding:15px;text-align:center;font-weight:900;font-size:22px}
+.top{max-width:500px;margin:15px auto;background:#1e293b;padding:15px;border-radius:12px}
+.top input,.top select{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:none}
+.top button{width:100%;padding:12px;background:#25D366;color:#000;font-weight:800;border:none;border-radius:8px;margin-top:8px}
+.grid{max-width:700px;margin:auto;padding:15px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#1e293b;border-radius:12px;padding:12px;text-align:center}
+.card h3{color:#facc15}
+.card p{margin:6px 0;font-size:14px}
+.card button{width:100%;padding:10px;background:#facc15;color:#000;font-weight:800;border:none;border-radius:8px;margin-top:8px;cursor:pointer}
+.foot{text-align:center;padding:20px;color:#94a3b8;font-size:13px}
+</style>
+</head>
+<body>
+<header>⚡ THUNDER CHEAP DATA HUB ⚡</header>
+
+<div class="top">
+<h3 style="text-align:center;margin-bottom:10px">Enter Beneficiary Details</h3>
+<input id="phone" placeholder="Beneficiary Number (e.g. 054...)">
+<select id="network">
+<option>MTN</option>
+<option>Telecel</option>
+<option>AT</option>
+</select>
+<input id="email" placeholder="Your Email (for receipt)">
+</div>
+
+<div class="grid">
+<div class="card"><h3>1GB</h3><p>MTN - 3 Days</p><b>Ghc 5</b><button onclick="buy(5,'1GB MTN')">BUY</button></div>
+<div class="card"><h3>2GB</h3><p>MTN - 5 Days</p><b>Ghc 9</b><button onclick="buy(9,'2GB MTN')">BUY</button></div>
+<div class="card"><h3>3GB</h3><p>MTN - 7 Days</p><b>Ghc 13</b><button onclick="buy(13,'3GB MTN')">BUY</button></div>
+<div class="card"><h3>5GB</h3><p>MTN - 30 Days</p><b>Ghc 22</b><button onclick="buy(22,'5GB MTN')">BUY</button></div>
+<div class="card"><h3>10GB</h3><p>MTN - 30 Days</p><b>Ghc 40</b><button onclick="buy(40,'10GB MTN')">BUY</button></div>
+<div class="card"><h3>15GB</h3><p>MTN - 30 Days</p><b>Ghc 58</b><button onclick="buy(58,'15GB MTN')">BUY</button></div>
+</div>
+
+<div class="foot">Pay with MoMo via Paystack - Secure & Instant<br>WhatsApp: 054... | thundercheapdata.com</div>
+
+<script>
+function buy(amount, bundle){
+let phone = document.getElementById('phone').value;
+let email = document.getElementById('email').value || 'customer@thunder.com';
+if(!phone){alert('Please enter Beneficiary Number!');return;}
+let handler = PaystackPop.setup({
+key:'pk_live_45851513b7f163a6bba4081f633c923ebc48cf32',
+email: email,
+amount: amount*100,
+currency:'GHS',
+ref: 'THUNDER_'+Math.floor(Math.random()*1000000000),
+metadata:{
+custom_fields:[
+{display_name:"Beneficiary",variable_name:"beneficiary",value:phone},
+{display_name:"Bundle",variable_name:"bundle",value:bundle}
+]
+},
+callback: function(response){
+alert('Payment Successful! Ref: '+response.reference+'\nWe will send '+bundle+' to '+phone+' shortly. Send receipt to WhatsApp!');
+window.location.href='https://wa.me/233540000000?text='+encodeURIComponent('Hello Thunder! I paid Ghc'+amount+' for '+bundle+' to '+phone+'. Ref: '+response.reference);
+},
+onClose: function(){alert('Payment cancelled');}
+});
+handler.openIframe();
+}
+</script>
+</body>
+</html>
